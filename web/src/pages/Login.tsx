@@ -2,7 +2,6 @@ import { Lock } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { BorderBeam } from '@/components/ui/border-beam'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
@@ -32,11 +31,10 @@ export default function Login() {
 
   return (
     <main className="grid min-h-dvh place-items-center px-4">
-      <Card className="relative w-full max-w-sm">
-        <BorderBeam size={120} duration={8} colorFrom="var(--primary)" colorTo="var(--secondary)" />
+      <Card className="w-full max-w-sm rounded-none ring-1 ring-foreground shadow-[6px_6px_0_0_var(--foreground)]">
         <CardHeader>
-          <span className="sticker grid size-12 place-items-center rounded-xl bg-secondary text-secondary-foreground" aria-hidden><Lock className="size-5" /></span>
-          <CardTitle className="mt-2 text-3xl font-extrabold">Panel del personal</CardTitle>
+          <p className="label flex items-center gap-1.5"><Lock className="size-3" aria-hidden /> Solo personal</p>
+          <CardTitle className="mt-2 text-4xl font-semibold tracking-tight">Panel del personal</CardTitle>
           <CardDescription>{settings.restaurantName}. Entra para gestionar pedidos y stock.</CardDescription>
         </CardHeader>
         <CardContent>

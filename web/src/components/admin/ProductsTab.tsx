@@ -36,10 +36,10 @@ export function ProductsTab({ products, alertUnits, onChanged }: Props) {
             <li key={p.id}>
              <Card size="sm" className={cn(!p.active && 'opacity-70')}>
               <CardHeader className="flex items-center gap-3">
-                <span className="sticker grid size-14 shrink-0 place-items-center rounded-xl text-3xl" style={{ backgroundColor: tileFor(p.id) }} aria-hidden>{p.emoji}</span>
+                <span className="border border-border grid size-14 shrink-0 place-items-center rounded-md text-3xl" style={{ backgroundColor: tileFor(p.id) }} aria-hidden>{p.emoji}</span>
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-heading text-lg font-bold">{p.name}</p>
-                  <p className="num font-extrabold text-primary">{formatMoney(p.price)}</p>
+                  <p className="num font-semibold text-primary">{formatMoney(p.price)}</p>
                 </div>
                 <Tooltip><TooltipTrigger render={<Button variant="ghost" size="icon" aria-label={`Editar ${p.name}`} onClick={() => setEditing(p)} />}><Pencil /></TooltipTrigger><TooltipContent>Editar plato</TooltipContent></Tooltip>
               </CardHeader>

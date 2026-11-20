@@ -1,9 +1,8 @@
-import { AlertTriangle, ArrowDownRight, ArrowUpRight, ChefHat, Receipt, ShoppingBag, TrendingUp, Wallet } from 'lucide-react'
+import { AlertTriangle, ChefHat, Receipt, ShoppingBag, TrendingUp, Wallet } from 'lucide-react'
 import { Bar, BarChart, Cell, CartesianGrid, XAxis } from 'recharts'
 import { Badge } from '@/components/ui/badge'
-import { BlurFade } from '@/components/ui/blur-fade'
 import { Button } from '@/components/ui/button'
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart'
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
 import { Progress } from '@/components/ui/progress'
@@ -18,27 +17,20 @@ interface Props { orders: Order[] | null; ingredients: Ingredient[] | null; onVi
 
 const chartConfig = { orders: { label: 'Pedidos', color: 'var(--chart-1)' } } satisfies ChartConfig
 
-function Kpi({ icon: Icon, label, value, money, change, hint, delay }: { icon: typeof Wallet; label: string; value: number; money?: boolean; change?: number | null; hint?: string; delay: number }) {
+function Kpi({ label, value, money, change, hint }: { icon?: typeof Wallet; label: string; value: number; money?: boolean; change?: number | null; hint?: string; delay?: number }) {
   const up = (change ?? 0) >= 0
   return (
-    <BlurFade delay={delay} inView={false}>
-      <Card size="sm">
-        <CardHeader>
-          <CardDescription className="flex items-center gap-1.5 font-semibold"><Icon className="size-4" aria-hidden /> {label}</CardDescription>
-          <CardTitle className="num font-heading text-2xl font-extrabold sm:text-3xl">
-            {money ? <><NumberTicker value={value} decimalPlaces={2} className="text-foreground" /> €</> : <NumberTicker value={value} className="text-foreground" />}
-          </CardTitle>
-          {change != null && (
-            <CardAction>
-              <Badge variant={up ? 'secondary' : 'destructive'} className="num gap-0.5">
-                {up ? <ArrowUpRight data-icon="inline-start" /> : <ArrowDownRight data-icon="inline-start" />}{Math.abs(change)}%
-              </Badge>
-            </CardAction>
-          )}
-        </CardHeader>
-        <CardFooter className="min-h-5 text-xs text-muted-foreground sm:text-sm">{change != null ? 'vs ayer' : hint}</CardFooter>
-      </Card>
-    </BlurFade>
+    <div className="flex flex-col gap-3 p-4 sm:p-5">
+      <p className="label">{label}</p>
+      <p className="num text-3xl font-medium sm:text-4xl">
+        {money ? <><NumberTicker value={value} decimalPlaces={2} className="text-foreground" /> €</> : <NumberTicker value={value} className="text-foreground" />}
+      </p>
+      <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+        {change != null ? (
+          <><span className={up ? 'num font-medium text-leaf' : 'num font-medium text-destructive'}>{up ? '▲' : '▼'} {Math.abs(change)}%</span> vs ayer</>
+        ) : hint}
+      </p>
+    </div>
   )
 }
 
@@ -56,7 +48,7 @@ export function OverviewTab({ orders, ingredients, onView }: Props) {
 
   return (
     <div className="grid gap-4">
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+      <div className="grid grid-cols-2 divide-border border border-foreground bg-card [&>*]:border-b [&>*]:border-dashed [&>*]:border-border xl:grid-cols-4 xl:[&>*]:border-b-0 xl:[&>*:not(:last-child)]:border-r">
         <Kpi delay={0} icon={Wallet} label="Ventas de hoy" value={s.today.revenue} money change={delta(s.today.revenue, s.yesterday.revenue)} hint="Sin datos de ayer" />
         <Kpi delay={0.04} icon={Receipt} label="Pedidos de hoy" value={s.today.orders} change={delta(s.today.orders, s.yesterday.orders)} hint={s.cancelled ? `${s.cancelled} cancelados` : 'Ninguno cancelado'} />
         <Kpi delay={0.08} icon={TrendingUp} label="Ticket medio" value={s.today.avg} money hint="Por pedido, sin cancelados" />
@@ -94,7 +86,7 @@ export function OverviewTab({ orders, ingredients, onView }: Props) {
               <ol className="flex flex-col gap-3">
                 {s.top.map((t) => (
                   <li key={t.name} className="flex flex-col gap-1.5">
-                    <p className="flex items-center gap-2 text-sm font-semibold"><span className="sticker grid size-8 place-items-center rounded-lg text-base" style={{ backgroundColor: tileFor(t.name) }} aria-hidden>{t.emoji}</span><span className="flex-1 truncate">{t.name}</span><span className="num">{t.qty}</span></p>
+                    <p className="flex items-center gap-2 text-sm font-semibold"><span className="border border-border grid size-8 place-items-center rounded-lg text-base" style={{ backgroundColor: tileFor(t.name) }} aria-hidden>{t.emoji}</span><span className="flex-1 truncate">{t.name}</span><span className="num">{t.qty}</span></p>
                     <Progress value={(t.qty / topMax) * 100} aria-label={`${t.name}: ${t.qty}`} />
                   </li>
                 ))}

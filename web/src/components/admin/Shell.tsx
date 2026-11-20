@@ -60,9 +60,9 @@ export function Shell({ view, onView, badges, user, name, live, sound, onSound, 
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton size="lg" className="pointer-events-none">
-                  <Avatar className="size-8 rounded-lg"><AvatarFallback className="rounded-lg bg-secondary text-lg">🔥</AvatarFallback></Avatar>
+                  <Avatar className="size-8 rounded-lg"><AvatarFallback className="rounded-lg bg-secondary text-lg">◼</AvatarFallback></Avatar>
                   <div className="grid min-w-0 flex-1 leading-tight">
-                    <span className="truncate font-heading text-base font-extrabold">{name}</span>
+                    <span className="truncate font-heading text-base font-semibold">{name}</span>
                     <span className="truncate text-xs text-rail-muted">Panel de cocina</span>
                   </div>
                 </SidebarMenuButton>
@@ -114,7 +114,7 @@ export function Shell({ view, onView, badges, user, name, live, sound, onSound, 
           <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b border-border bg-background/90 px-3 backdrop-blur lg:h-16 lg:px-6">
             <SidebarTrigger aria-label="Mostrar u ocultar el menú" />
             <Separator orientation="vertical" className="mx-1 h-5" />
-            <h1 className="font-heading text-xl font-extrabold lg:text-2xl">{current.label}</h1>
+            <h1 className="font-heading text-xl font-semibold lg:text-2xl">{current.label}</h1>
             <Badge variant="outline" role="status" className="ml-1 gap-1.5 font-bold text-muted-foreground">
               <span className={cn('size-2 rounded-full', live ? 'bg-leaf' : 'bg-destructive')} aria-hidden />
               <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">{live ? 'En vivo' : 'Sin conexión'}</span>

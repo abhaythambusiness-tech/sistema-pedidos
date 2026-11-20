@@ -1,14 +1,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/bricolage-grotesque";
-@import "@fontsource-variable/figtree";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: 'Bricolage Grotesque Variable', 'Figtree Variable', sans-serif;
-    --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
+    --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+    --color-signal: var(--signal);
     --color-leaf: var(--leaf);
     --color-rail: var(--rail);
     --color-rail-foreground: var(--rail-foreground);
@@ -90,45 +92,46 @@
 }
 
 :root {
-    --background: oklch(0.97 0.014 85);
-    --foreground: oklch(0.21 0.02 50);
-    --card: oklch(0.995 0.006 85);
-    --card-foreground: oklch(0.21 0.02 50);
-    --popover: oklch(0.995 0.006 85);
-    --popover-foreground: oklch(0.21 0.02 50);
-    --primary: oklch(0.56 0.21 28);
-    --primary-foreground: oklch(0.99 0.01 85);
-    --secondary: oklch(0.88 0.13 88);
-    --secondary-foreground: oklch(0.25 0.04 70);
-    --muted: oklch(0.94 0.018 85);
-    --muted-foreground: oklch(0.45 0.025 60);
-    --accent: oklch(0.92 0.05 85);
-    --accent-foreground: oklch(0.21 0.02 50);
-    --destructive: oklch(0.5 0.2 27);
-    --border: oklch(0.21 0.02 50 / 0.16);
-    --input: oklch(0.21 0.02 50 / 0.22);
-    --ring: oklch(0.56 0.21 28);
-    --radius: 0.875rem;
+    --background: oklch(0.975 0.005 95);
+    --foreground: oklch(0.17 0.005 60);
+    --card: oklch(0.995 0.003 95);
+    --card-foreground: oklch(0.17 0.005 60);
+    --popover: oklch(0.995 0.003 95);
+    --popover-foreground: oklch(0.17 0.005 60);
+    --primary: oklch(0.17 0.005 60);
+    --primary-foreground: oklch(0.975 0.005 95);
+    --secondary: oklch(0.93 0.006 95);
+    --secondary-foreground: oklch(0.17 0.005 60);
+    --muted: oklch(0.945 0.005 95);
+    --muted-foreground: oklch(0.48 0.008 70);
+    --accent: oklch(0.92 0.006 95);
+    --accent-foreground: oklch(0.17 0.005 60);
+    --destructive: oklch(0.52 0.2 27);
+    --border: oklch(0.17 0.005 60 / 0.14);
+    --input: oklch(0.17 0.005 60 / 0.24);
+    --ring: oklch(0.62 0.2 38);
+    --radius: 0.375rem;
+    --signal: oklch(0.6 0.21 38);
     --leaf: oklch(0.5 0.12 150);
-    --rail: oklch(0.2 0.02 50);
-    --rail-foreground: oklch(0.95 0.02 85);
-    --rail-muted: oklch(0.72 0.025 70);
-    --rail-active: oklch(0.3 0.03 50);
-    --rail-border: oklch(0.95 0.02 85 / 0.12);
+    --rail: oklch(0.15 0.005 60);
+    --rail-foreground: oklch(0.96 0.005 95);
+    --rail-muted: oklch(0.7 0.008 80);
+    --rail-active: oklch(0.24 0.006 60);
+    --rail-border: oklch(0.96 0.005 95 / 0.12);
     --mustard: oklch(0.88 0.13 88);
-    --tile-1: oklch(0.9 0.11 88);
-    --tile-2: oklch(0.88 0.08 30);
-    --tile-3: oklch(0.89 0.08 150);
-    --tile-4: oklch(0.9 0.05 70);
-    --chart-1: oklch(0.56 0.21 28);
-    --chart-2: oklch(0.88 0.13 88);
+    --tile-1: oklch(0.93 0.006 95);
+    --tile-2: oklch(0.92 0.012 60);
+    --tile-3: oklch(0.92 0.012 130);
+    --tile-4: oklch(0.91 0.008 95);
+    --chart-1: oklch(0.6 0.21 38);
+    --chart-2: oklch(0.17 0.005 60);
     --chart-3: oklch(0.5 0.12 150);
-    --chart-4: oklch(0.45 0.025 60);
-    --chart-5: oklch(0.21 0.02 50);
+    --chart-4: oklch(0.6 0.008 70);
+    --chart-5: oklch(0.8 0.006 90);
     --sidebar: var(--rail);
     --sidebar-foreground: var(--rail-foreground);
-    --sidebar-primary: var(--primary);
-    --sidebar-primary-foreground: var(--primary-foreground);
+    --sidebar-primary: var(--signal);
+    --sidebar-primary-foreground: oklch(0.99 0 0);
     --sidebar-accent: var(--rail-active);
     --sidebar-accent-foreground: var(--rail-foreground);
     --sidebar-border: var(--rail-border);
@@ -136,46 +139,43 @@
 }
 
 .dark {
-    --background: oklch(0.19 0.012 50);
-    --foreground: oklch(0.95 0.02 85);
-    --card: oklch(0.23 0.014 50);
-    --card-foreground: oklch(0.95 0.02 85);
-    --popover: oklch(0.25 0.014 50);
-    --popover-foreground: oklch(0.95 0.02 85);
-    --primary: oklch(0.66 0.19 30);
-    --primary-foreground: oklch(0.17 0.02 50);
-    --secondary: oklch(0.78 0.13 88);
-    --secondary-foreground: oklch(0.2 0.03 70);
-    --muted: oklch(0.27 0.014 50);
-    --muted-foreground: oklch(0.75 0.025 70);
-    --accent: oklch(0.3 0.03 70);
-    --accent-foreground: oklch(0.95 0.02 85);
+    --background: oklch(0.15 0.004 60);
+    --foreground: oklch(0.95 0.005 95);
+    --card: oklch(0.19 0.005 60);
+    --card-foreground: oklch(0.95 0.005 95);
+    --popover: oklch(0.21 0.005 60);
+    --popover-foreground: oklch(0.95 0.005 95);
+    --primary: oklch(0.95 0.005 95);
+    --primary-foreground: oklch(0.15 0.004 60);
+    --secondary: oklch(0.25 0.005 60);
+    --secondary-foreground: oklch(0.95 0.005 95);
+    --muted: oklch(0.23 0.005 60);
+    --muted-foreground: oklch(0.72 0.008 80);
+    --accent: oklch(0.27 0.006 60);
+    --accent-foreground: oklch(0.95 0.005 95);
     --destructive: oklch(0.7 0.18 25);
-    --border: oklch(0.95 0.02 85 / 0.16);
-    --input: oklch(0.95 0.02 85 / 0.22);
-    --ring: oklch(0.66 0.19 30);
+    --border: oklch(0.95 0.005 95 / 0.15);
+    --input: oklch(0.95 0.005 95 / 0.22);
+    --ring: oklch(0.7 0.19 40);
+    --signal: oklch(0.7 0.19 40);
     --leaf: oklch(0.75 0.14 150);
-    --rail: oklch(0.16 0.012 50);
-    --rail-active: oklch(0.26 0.02 50);
-    --mustard: oklch(0.78 0.13 88);
-    --tile-1: oklch(0.42 0.07 88);
-    --tile-2: oklch(0.4 0.09 30);
-    --tile-3: oklch(0.4 0.07 150);
-    --tile-4: oklch(0.38 0.04 70);
+    --rail: oklch(0.12 0.004 60);
+    --rail-active: oklch(0.22 0.005 60);
+    --tile-1: oklch(0.26 0.005 60);
+    --tile-2: oklch(0.27 0.012 60);
+    --tile-3: oklch(0.27 0.012 130);
+    --tile-4: oklch(0.25 0.008 95);
+    --chart-1: oklch(0.7 0.19 40);
+    --chart-2: oklch(0.95 0.005 95);
+    --chart-3: oklch(0.75 0.14 150);
+    --chart-4: oklch(0.6 0.008 70);
+    --chart-5: oklch(0.4 0.006 60);
 }
 
 @layer base {
   * { @apply border-border outline-ring/50; }
   html { @apply font-sans; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
   body { @apply bg-background text-foreground antialiased; min-height: 100dvh; }
-  /* Fondo SVG: garabatos de comida en tono foreground, muy tenue, detrás de todo. */
-  body::before {
-    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background-color: var(--foreground); opacity: 0.045;
-    -webkit-mask: url('/bg-doodles.svg') 0 0 / 280px 280px repeat; mask: url('/bg-doodles.svg') 0 0 / 280px 280px repeat;
-  }
-  .dark body::before { opacity: 0.06; }
-  @media (max-width: 640px) { body::before { -webkit-mask-size: 220px 220px; mask-size: 220px 220px; } }
   h1, h2, h3, h4 { @apply font-heading; letter-spacing: -0.02em; text-wrap: balance; }
   p { text-wrap: pretty; }
   :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
@@ -185,14 +185,11 @@
 }
 
 @layer components {
-  .num { font-variant-numeric: tabular-nums; }
-  .kbd { display: inline-flex; align-items: center; height: 1.25rem; padding: 0 0.375rem; border-radius: 0.375rem; border: 1px solid var(--border); font-size: 0.6875rem; font-weight: 700; line-height: 1; }
-  .sticker {
-    background-image: radial-gradient(color-mix(in oklch, var(--foreground) 14%, transparent) 1.2px, transparent 1.4px);
-    background-size: 14px 14px;
-    box-shadow: 3px 3px 0 0 color-mix(in oklch, var(--foreground) 85%, transparent);
-    border: 1.5px solid var(--foreground);
-  }
+  .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .kbd { display: inline-flex; align-items: center; height: 1.25rem; padding: 0 0.375rem; border-radius: 0.25rem; border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 500; line-height: 1; }
+  .leader { flex: 1; min-width: 1rem; align-self: flex-end; margin-bottom: 0.35em; border-bottom: 1.5px dotted color-mix(in oklch, var(--foreground) 35%, transparent); }
+  .tear { height: 10px; background: radial-gradient(circle at 50% 0, transparent 5px, var(--card) 5.5px) 0 0 / 14px 10px repeat-x; }
+  .label { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-foreground); }
 }
 
 /* transitions.dev: escala de tokens de movimiento */

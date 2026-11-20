@@ -96,7 +96,7 @@ export function OrdersTab({ orders, fresh, query, onQuery, onChanged }: Props) {
             </ul>
             <Separator />
             <div className="flex items-center gap-1">
-              <span className="num mr-auto text-base font-extrabold">{formatMoney(o.total)}</span>
+              <span className="num mr-auto text-base font-semibold">{formatMoney(o.total)}</span>
               <Tooltip><TooltipTrigger render={<Button variant="ghost" size="icon" aria-label="Ver ticket" onClick={() => run(async () => setTicket({ id: o.id, text: await api.admin.ticket(o.id) }))} />}><Receipt /></TooltipTrigger><TooltipContent>Ver ticket</TooltipContent></Tooltip>
               <Tooltip><TooltipTrigger render={<Button variant="ghost" size="icon" aria-label="Reimprimir" onClick={() => run(async () => { const r = await api.admin.reprint(o.id); if (!r.print.ok) throw new Error('La impresora no responde') }, 'Ticket enviado a la impresora')} />}><Printer /></TooltipTrigger><TooltipContent>Reimprimir</TooltipContent></Tooltip>
               {(o.status === 'pending' || o.status === 'preparing' || o.status === 'ready') && <Tooltip><TooltipTrigger render={<Button variant="ghost" size="icon" className="text-destructive" aria-label="Cancelar pedido" onClick={() => setCancelling(o)} />}><XCircle /></TooltipTrigger><TooltipContent>Cancelar pedido</TooltipContent></Tooltip>}
@@ -140,7 +140,7 @@ export function OrdersTab({ orders, fresh, query, onQuery, onChanged }: Props) {
               const list = filtered.filter((o) => o.status === c.status).sort((a, b) => a.createdAt.localeCompare(b.createdAt))
               return (
                 <section key={c.status} aria-label={c.title} className={cn('min-w-0 rounded-2xl bg-muted/60 p-3', col !== c.status && 'hidden lg:block')}>
-                  <h2 className="mb-3 flex items-center gap-2 px-1 text-sm font-extrabold tracking-wide uppercase">
+                  <h2 className="mb-3 flex items-center gap-2 px-1 text-sm font-semibold tracking-wide uppercase">
                     {c.title}<span className="num grid min-w-6 place-items-center rounded-full bg-foreground px-1.5 text-xs text-background">{list.length}</span>
                     <span className="num ml-auto text-xs font-semibold text-muted-foreground normal-case">{formatMoney(list.reduce((s, o) => s + o.total, 0))}</span>
                   </h2>
