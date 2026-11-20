@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280" viewBox="0 0 280 280" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- hamburguesa -->
+  <g transform="translate(24 28) rotate(-8 28 24)">
+    <path d="M6 24c0-12 10-20 22-20s22 8 22 20z"/>
+    <path d="M4 32h48M8 38c4 4 8-4 12 0s8-4 12 0 8-4 12 0"/>
+    <path d="M6 46h44c0 6-4 8-8 8H14c-4 0-8-2-8-8z"/>
+    <path d="M18 14h.01M28 11h.01M38 14h.01"/>
+  </g>
+  <!-- papas -->
+  <g transform="translate(176 20) rotate(10 24 28)">
+    <path d="M6 22h36l-4 34H10z"/>
+    <path d="M12 22l-2-14M20 22l-1-18M28 22l1-16M36 22l3-12"/>
+    <path d="M14 34h20"/>
+  </g>
+  <!-- llama -->
+  <g transform="translate(112 112)">
+    <path d="M24 2c2 10 14 14 14 28a14 14 0 0 1-28 0c0-6 3-9 6-12 0 5 3 7 5 7 0-8-2-14 3-23z"/>
+    <path d="M24 52c-5 0-8-3-8-7 0-4 4-6 8-12 4 6 8 8 8 12 0 4-3 7-8 7z"/>
+  </g>
+  <!-- vaso -->
+  <g transform="translate(26 150) rotate(6 20 30)">
+    <path d="M6 16h32l-4 40H10z"/>
+    <path d="M4 16h36M26 16l6-12h8"/>
+    <path d="M12 30h20"/>
+  </g>
+  <!-- chispas -->
+  <g>
+    <path d="M232 128v16M224 136h16"/>
+    <path d="M92 238v12M86 244h12"/>
+    <path d="M210 232v10M205 237h10"/>
+    <path d="M70 92v10M65 97h10"/>
+    <circle cx="258" cy="84" r="2"/>
+    <circle cx="150" cy="250" r="2"/>
+    <circle cx="14" cy="104" r="2"/>
+    <circle cx="150" cy="84" r="2"/>
+  </g>
+  <!-- tenedor y cuchillo -->
+  <g transform="translate(200 160) rotate(-14 20 30)">
+    <path d="M6 4v18c0 5 4 8 8 8s8-3 8-8V4M14 4v52"/>
+    <path d="M32 4c-6 6-6 20 0 26v26"/>
+  </g>
+</svg>

@@ -45,3 +45,6 @@ Contraste AA mínimo, foco visible con anillo mostaza+tinta, estados no solo por
 
 ## Stack de componentes (v2.2)
 El panel usa componentes reales, no HTML a mano: shadcn/ui (base-nova sobre Base UI): `Sidebar`, `Command` (paleta Ctrl+K), `Card`, `Chart` (Recharts), `Tooltip`, `ToggleGroup`, `Field`/`FieldGroup`, `InputGroup`, `Empty`, `Badge`, `Avatar`, `Spinner`. Magic UI: `NumberTicker` (KPIs), `BlurFade` (entrada de tarjetas). Motion: `motion/react` en las tarjetas de pedido. Tokens de transitions.dev (`--duration-*`, `--ease-smooth-out`, `--distance-*`, `--blur-*`) al final de `web/src/index.css`, con `prefers-reduced-motion` a 0 ms; sin `transition-all` ni `ease-in`.
+
+## Fondo SVG
+`web/public/bg-doodles.svg` (garabatos de comida, trazo negro) se usa como `mask` en `body::before` (`index.css`), pintado con `--foreground` al 4.5 % (6 % en oscuro). Fijo, `pointer-events: none`, `z-index: -1`; no afecta contraste ni interacción.
