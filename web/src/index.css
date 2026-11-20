@@ -93,13 +93,13 @@
     --chart-3: oklch(0.5 0.12 150);
     --chart-4: oklch(0.45 0.025 60);
     --chart-5: oklch(0.21 0.02 50);
-    --sidebar: var(--card);
-    --sidebar-foreground: var(--foreground);
+    --sidebar: var(--rail);
+    --sidebar-foreground: var(--rail-foreground);
     --sidebar-primary: var(--primary);
     --sidebar-primary-foreground: var(--primary-foreground);
-    --sidebar-accent: var(--accent);
-    --sidebar-accent-foreground: var(--accent-foreground);
-    --sidebar-border: var(--border);
+    --sidebar-accent: var(--rail-active);
+    --sidebar-accent-foreground: var(--rail-foreground);
+    --sidebar-border: var(--rail-border);
     --sidebar-ring: var(--ring);
 }
 
@@ -153,4 +153,20 @@
     box-shadow: 3px 3px 0 0 color-mix(in oklch, var(--foreground) 85%, transparent);
     border: 1.5px solid var(--foreground);
   }
+}
+
+/* transitions.dev: escala de tokens de movimiento */
+:root {
+  --duration-stagger: 40ms;
+  --duration-micro: 80ms;
+  --duration-quick: 150ms;
+  --duration-fast: 250ms;
+  --duration-medium: 350ms;
+  --duration-slow: 400ms;
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --distance-base: 8px;
+  --blur-small: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --duration-quick: 0ms; --duration-fast: 0ms; --duration-medium: 0ms; --duration-slow: 0ms; --duration-micro: 0ms; --duration-stagger: 0ms; }
 }

@@ -1,8 +1,12 @@
 import { AlertTriangle, CheckCircle2, Search, XOctagon } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Card } from '@/components/ui/card'
+import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
 import { Input } from '@/components/ui/input'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { api } from '@/lib/api'
@@ -15,9 +19,9 @@ const STEPS = [-10, -1, 1, 10]
 function level(i: Ingredient) { return i.stock <= 0 ? 'out' : i.stock <= i.min_stock ? 'low' : 'ok' }
 
 const PILL = {
-  ok: { cls: 'bg-leaf/15 text-leaf', Icon: CheckCircle2, text: 'Bien' },
-  low: { cls: 'bg-secondary text-secondary-foreground', Icon: AlertTriangle, text: 'Poco' },
-  out: { cls: 'bg-destructive/10 text-destructive', Icon: XOctagon, text: 'Agotado' },
+  ok: { cls: 'outline' as const, Icon: CheckCircle2, text: 'Bien' },
+  low: { cls: 'secondary' as const, Icon: AlertTriangle, text: 'Poco' },
+  out: { cls: 'destructive' as const, Icon: XOctagon, text: 'Agotado' },
 }
 
 export function InventoryTab({ ingredients, onChanged }: { ingredients: Ingredient[] | null; onChanged: () => Promise<void> }) {
@@ -37,11 +41,11 @@ export function InventoryTab({ ingredients, onChanged }: { ingredients: Ingredie
 
   return (
     <div className="grid gap-3">
-      <div className="relative max-w-xs">
-        <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
-        <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar ingrediente" aria-label="Buscar ingrediente" className="h-11 bg-card pl-9" />
-      </div>
-      <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+      <InputGroup className="max-w-xs">
+        <InputGroupAddon><Search /></InputGroupAddon>
+        <InputGroupInput value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar ingrediente" aria-label="Buscar ingrediente" />
+      </InputGroup>
+      <Card className="overflow-x-auto py-0">
         <Table>
           <TableHeader>
             <TableRow>
@@ -59,16 +63,16 @@ export function InventoryTab({ ingredients, onChanged }: { ingredients: Ingredie
                 <TableRow key={i.id} className={cn(l !== 'ok' && 'bg-secondary/20')}>
                   <TableCell className="font-semibold whitespace-nowrap">{i.emoji} {i.name}</TableCell>
                   <TableCell>
-                    <span className={cn('num inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-sm font-bold', cls)}>
-                      <Icon className="size-3.5" aria-hidden /> {i.stock} {i.unit} <span className="sr-only">({text})</span>
-                    </span>
+                    <Badge variant={cls} className="num h-7 gap-1.5 px-2.5 text-sm">
+                      <Icon data-icon="inline-start" /> {i.stock} {i.unit} <span className="sr-only">({text})</span>
+                    </Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex gap-1" role="group" aria-label={`Ajustar ${i.name}`}>
+                    <ToggleGroup value={[]} variant="outline" size="sm" aria-label={`Ajustar ${i.name}`}>
                       {STEPS.map((s) => (
-                        <Button key={s} variant="outline" size="sm" className="num min-w-11" onClick={() => adjust(i, s)} disabled={s < 0 && i.stock <= 0}>{s > 0 ? `+${s}` : s}</Button>
+                        <ToggleGroupItem key={s} value={String(s)} className="num min-w-11" onClick={() => adjust(i, s)} disabled={s < 0 && i.stock <= 0}>{s > 0 ? `+${s}` : s}</ToggleGroupItem>
                       ))}
-                    </div>
+                    </ToggleGroup>
                   </TableCell>
                   <TableCell>
                     <Input type="number" inputMode="decimal" min={0} defaultValue={i.min_stock} key={`${i.id}-${i.min_stock}`} aria-label={`Aviso de ${i.name}`}
@@ -77,10 +81,10 @@ export function InventoryTab({ ingredients, onChanged }: { ingredients: Ingredie
                 </TableRow>
               )
             })}
-            {rows.length === 0 && <TableRow><TableCell colSpan={4} className="py-8 text-center text-muted-foreground">Ningún ingrediente coincide.</TableCell></TableRow>}
+            {rows.length === 0 && <TableRow><TableCell colSpan={4}><Empty><EmptyHeader><EmptyMedia variant="icon"><Search /></EmptyMedia><EmptyTitle>Ningún ingrediente coincide</EmptyTitle></EmptyHeader></Empty></TableCell></TableRow>}
           </TableBody>
         </Table>
-      </div>
+      </Card>
     </div>
   )
 }
