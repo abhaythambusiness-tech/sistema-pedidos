@@ -1,8 +1,14 @@
-import { Loader2, Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react'
+import { Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
+import { Field, FieldLabel } from '@/components/ui/field'
+import { ShimmerButton } from '@/components/ui/shimmer-button'
+import { Spinner } from '@/components/ui/spinner'
 import { Input } from '@/components/ui/input'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { api } from '@/lib/api'
@@ -48,12 +54,14 @@ export function CartSheet({ open, onOpenChange, onOrdered }: Props) {
         </SheetHeader>
 
         {cart.lines.length === 0 ? (
-          <div className="grid flex-1 place-content-center justify-items-center gap-3 p-8 text-center text-muted-foreground">
-            <ShoppingBag className="size-10" aria-hidden />
-            <p className="font-heading text-lg font-bold text-foreground">Todavía no has pedido nada</p>
-            <p className="text-sm">Elige algo de la carta y aparecerá aquí.</p>
+          <Empty className="flex-1">
+            <EmptyHeader>
+              <EmptyMedia variant="icon"><ShoppingBag /></EmptyMedia>
+              <EmptyTitle>Todavía no has pedido nada</EmptyTitle>
+              <EmptyDescription>Elige algo de la carta y aparecerá aquí.</EmptyDescription>
+            </EmptyHeader>
             <Button variant="outline" onClick={() => onOpenChange(false)}>Ver la carta</Button>
-          </div>
+          </Empty>
         ) : (
           <>
             <ul className="flex-1 divide-y divide-border overflow-y-auto px-5">
@@ -64,9 +72,9 @@ export function CartSheet({ open, onOpenChange, onOrdered }: Props) {
                     <div className="min-w-0 flex-1">
                       <p className="font-heading font-bold">{l.name}</p>
                       <div className="mt-1 flex flex-wrap gap-1 text-xs">
-                        {l.removedNames.length > 0 && <span className="rounded-full bg-secondary px-2 py-0.5 font-semibold text-secondary-foreground">Sin {l.removedNames.join(', ')}</span>}
-                        {l.extraNames.length > 0 && <span className="rounded-full bg-leaf/20 px-2 py-0.5 font-semibold text-leaf">+ {l.extraNames.join(', ')}</span>}
-                        {l.comments && <span className="rounded-full bg-muted px-2 py-0.5 text-muted-foreground">“{l.comments}”</span>}
+                        {l.removedNames.length > 0 && <Badge variant="secondary">Sin {l.removedNames.join(', ')}</Badge>}
+                        {l.extraNames.length > 0 && <Badge variant="outline">+ {l.extraNames.join(', ')}</Badge>}
+                        {l.comments && <Badge variant="outline" className="font-normal text-muted-foreground">“{l.comments}”</Badge>}
                       </div>
                     </div>
                     <p className="num font-extrabold">{formatMoney(l.unitPrice * l.quantity)}</p>
@@ -86,18 +94,20 @@ export function CartSheet({ open, onOpenChange, onOrdered }: Props) {
             </ul>
 
             <div className="grid gap-3 border-t border-border bg-muted/50 p-5">
-              <label className="grid gap-1.5">
-                <span className="text-sm font-bold">¿A nombre de quién? <span className="font-normal text-muted-foreground">· opcional</span></span>
-                <Input value={name} onChange={(e) => setName(e.target.value)} maxLength={60} placeholder="Ana" autoComplete="given-name" className="h-11 bg-card" />
-              </label>
-              {error && <p role="alert" className="rounded-lg bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive">{error}</p>}
+              <Field>
+                <FieldLabel htmlFor="cart-name">¿A nombre de quién? <span className="font-normal text-muted-foreground">· opcional</span></FieldLabel>
+                <Input id="cart-name" value={name} onChange={(e) => setName(e.target.value)} maxLength={60} placeholder="Ana" autoComplete="given-name" className="bg-card" />
+              </Field>
+              {error && <Alert variant="destructive"><AlertDescription>{error}</AlertDescription></Alert>}
               <div className="flex items-baseline justify-between">
                 <span className="text-muted-foreground">Total</span>
                 <span className="num font-heading text-3xl font-extrabold">{formatMoney(cart.total)}</span>
               </div>
-              <Button size="lg" onClick={submit} disabled={busy}>
-                {busy ? <><Loader2 className="animate-spin" aria-hidden /> Enviando…</> : 'Confirmar pedido'}
-              </Button>
+              {busy ? (
+                <Button size="lg" disabled><Spinner data-icon="inline-start" /> Enviando…</Button>
+              ) : (
+                <ShimmerButton onClick={submit} className="h-12 w-full text-base font-bold" borderRadius="0.75rem" shimmerColor="oklch(0.9 0.1 85)" background="var(--primary)" shimmerDuration="4s">Confirmar pedido</ShimmerButton>
+              )}
             </div>
           </>
         )}

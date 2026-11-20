@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { api, ApiError } from '@/lib/api'
 import { errorMessage, formatMoney, STATUS_FLOW, STATUS_LABEL } from '@/lib/format'
@@ -89,15 +90,17 @@ export default function Tracking() {
 
           {error && <p role="alert" className="mt-4 text-sm text-muted-foreground">Sin conexión, reintentando… ({error})</p>}
 
-          <section className="mt-8 rounded-2xl border border-border bg-card p-5">
-            <h2 className="mb-3 text-lg font-bold">Tu pedido</h2>
-            <ul className="grid gap-2">
-              {order.items.map((it, i) => (
-                <li key={i} className="flex gap-3"><span aria-hidden>{it.emoji}</span><span className="num font-bold">{it.quantity}×</span><span>{it.name}</span></li>
-              ))}
-            </ul>
-            <p className="mt-4 flex justify-between border-t border-dashed border-border pt-3 text-lg font-extrabold"><span>Total</span><span className="num">{formatMoney(order.total)}</span></p>
-          </section>
+          <Card className="mt-8">
+            <CardHeader><CardTitle className="text-lg font-bold">Tu pedido</CardTitle></CardHeader>
+            <CardContent>
+              <ul className="flex flex-col gap-2">
+                {order.items.map((it, i) => (
+                  <li key={i} className="flex gap-3"><span aria-hidden>{it.emoji}</span><span className="num font-bold">{it.quantity}×</span><span>{it.name}</span></li>
+                ))}
+              </ul>
+            </CardContent>
+            <CardFooter className="justify-between text-lg font-extrabold"><span>Total</span><span className="num">{formatMoney(order.total)}</span></CardFooter>
+          </Card>
         </>
       )}
     </main>

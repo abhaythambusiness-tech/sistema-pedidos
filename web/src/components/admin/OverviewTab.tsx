@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart'
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
+import { Progress } from '@/components/ui/progress'
 import { NumberTicker } from '@/components/ui/number-ticker'
 import { Skeleton } from '@/components/ui/skeleton'
 import { tileFor } from '@/lib/format'
@@ -94,7 +95,7 @@ export function OverviewTab({ orders, ingredients, onView }: Props) {
                 {s.top.map((t) => (
                   <li key={t.name} className="flex flex-col gap-1.5">
                     <p className="flex items-center gap-2 text-sm font-semibold"><span className="sticker grid size-8 place-items-center rounded-lg text-base" style={{ backgroundColor: tileFor(t.name) }} aria-hidden>{t.emoji}</span><span className="flex-1 truncate">{t.name}</span><span className="num">{t.qty}</span></p>
-                    <div className="h-1.5 rounded-full bg-muted"><div className="h-full rounded-full bg-primary" style={{ width: `${(t.qty / topMax) * 100}%` }} /></div>
+                    <Progress value={(t.qty / topMax) * 100} aria-label={`${t.name}: ${t.qty}`} />
                   </li>
                 ))}
               </ol>

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
+import { ShineBorder } from '@/components/ui/shine-border'
 import { Separator } from '@/components/ui/separator'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
@@ -69,7 +70,8 @@ export function OrdersTab({ orders, fresh, query, onQuery, onChanged }: Props) {
     const tone = !open ? 'outline' : mins >= LATE_MIN ? 'destructive' : mins >= WARN_MIN ? 'secondary' : 'outline'
     return (
       <motion.li key={o.id} layout="position" initial={{ opacity: 0, y: 8, filter: 'blur(2px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} exit={{ opacity: 0 }} transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}>
-        <Card size="sm" className={cn('transition-shadow duration-[var(--duration-fast)]', fresh.has(o.id) && 'ring-2 ring-primary')}>
+        <Card size="sm" className="relative">
+          {fresh.has(o.id) && <ShineBorder shineColor={['var(--primary)', 'var(--secondary)']} borderWidth={2} duration={6} />}
           <CardHeader className="flex items-start justify-between gap-2">
             <div className="min-w-0">
               <p className="flex items-center gap-1.5 font-heading text-base font-bold"><span className="num">{o.id}</span><Channel className="size-3.5 text-muted-foreground" aria-label={o.source === 'voice' ? 'Llamada' : 'Web'} /></p>
