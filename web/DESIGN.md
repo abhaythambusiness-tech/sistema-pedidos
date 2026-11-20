@@ -35,3 +35,10 @@ React + Tailwind v4 + shadcn/ui (base), motion, lucide. Sheet (carrito), Dialog 
 
 ## Accesibilidad
 Contraste AA mínimo, foco visible con anillo mostaza+tinta, estados no solo por color (icono + texto), `aria-live` para estado de pedido y avisos.
+
+## Admin como herramienta profesional (v2.1)
+- **Estructura**: riel lateral oscuro fijo (tokens `--rail*`) con atajos numéricos 1-6, barra superior con estado «En vivo», paleta `Ctrl K`, sonido y tema. En móvil, barra inferior de 6 secciones (objetivos ≥ 44 px).
+- **Resumen**: KPIs de hoy con variación vs ayer, pedidos por hora (barras) y más vendidos; todo calculado en el cliente desde los pedidos (sin endpoint nuevo).
+- **Pedidos**: tablero de 3 columnas (Recibidos, Preparando, Listos) ordenado por llegada; el temporizador pasa a mostaza a 8 min y a rojo a 15 min (icono + texto, no solo color). Historial y exportación CSV.
+- **Teclado**: `Ctrl/⌘ K` busca pedidos, secciones y acciones; `1-6` cambian de sección. Sonido de aviso de pedido nuevo (opt-out, guardado en el navegador).
+- **Tema**: claro/oscuro/sistema con selector manual; el riel se mantiene oscuro en ambos.

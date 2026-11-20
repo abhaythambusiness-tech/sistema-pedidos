@@ -5,7 +5,7 @@ Carta digital, pedidos, inventario y panel de cocina para un restaurante pequeñ
 ## Qué hay
 
 - **Cliente**: carta con personalización (quitar ingredientes, extras), carrito, confirmación y página de seguimiento `/pedido/:id` que se actualiza sola.
-- **Admin** (`/admin`): pedidos en curso con un botón por estado (pendiente → preparando → listo → entregado), cancelación que devuelve el stock exacto, ticket y reimpresión, inventario con ajustes rápidos y umbral de aviso, carta (ocultar/editar platos), movimientos y ajustes.
+- **Admin** (`/admin`): riel lateral, resumen del día (ventas, ticket medio, pedidos por hora, más vendidos), tablero de pedidos con temporizadores (pendiente → preparando → listo → entregado), historial y exportación CSV, cancelación que devuelve el stock exacto, ticket y reimpresión, inventario con ajustes rápidos, carta, movimientos y ajustes. Paleta `Ctrl K`, atajos `1-6`, sonido de pedido nuevo y tema claro/oscuro.
 - **Seguridad**: sin contraseñas por defecto, JWT, límite de intentos de login y de pedidos, cabeceras de seguridad y CSP, precios y cantidades validados en servidor, token de Vapi comparado en tiempo constante.
 
 ## Stack
